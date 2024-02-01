@@ -25,6 +25,9 @@
     #Install colorscheme molokai
     curl -o molokai.vim https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
 
+    #add colorscheme to .vimrc files
+    :colorscheme molokai
+    
     #Enjoy your vim
 
 ```

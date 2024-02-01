@@ -174,7 +174,6 @@ augroup cursor_off
     autocmd WinLeave * set nocursorline nocursorcolumn
     autocmd WinEnter * set cursorline cursorcolumn
 augroup END
-colorscheme molokai
 
 " }}}
 
