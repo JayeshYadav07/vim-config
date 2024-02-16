@@ -12,7 +12,6 @@
     yum install git -y
 
     #creat the required files and folders
-    mkdir -p ~/.vim ~/.vim/autoload ~/.vim/backup ~/.vim/colors ~/.vim/plugged
     touch ~/.vimrc
 
     # clone the repo for config file
@@ -20,10 +19,6 @@
     
     #copy the config file
     cp vim-config/.vim .vimrc
-    cd ~/.vim/colors
-
-    #Install colorscheme molokai
-    curl -o molokai.vim https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
 
     #add colorscheme to .vimrc files
     :colorscheme molokai
