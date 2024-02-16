@@ -1,14 +1,3 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""               
-"               
-"               ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
-"               ██║   ██║██║████╗ ████║██╔══██╗██╔════╝
-"               ██║   ██║██║██╔████╔██║██████╔╝██║     
-"               ╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║     
-"                ╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗
-"                 ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
-"               
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""               
-
 " Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 
@@ -30,13 +19,14 @@ set number
 " Highlight cursor line underneath the cursor horizontally.
 set cursorline
 
+" Highlight cursor line underneath the cursor vertically.
+set cursorcolumn
+
 " Set shift width to 4 spaces.
 set shiftwidth=4
 
 " Set tab width to 4 columns.
-set smarttab
-set smartindent
-set tabstop=4 softtabstop=4
+set tabstop=4
 
 " Use space characters instead of tabs.
 set expandtab
@@ -85,10 +75,22 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
+" PLUGINS ---------------------------------------------------------------- {{{
+
+call plug#begin('~/.vim/plugged')
+
+  Plug 'dense-analysis/ale'
+
+  Plug 'preservim/nerdtree'
+
+call plug#end()
+
+" }}}
+
 " MAPPINGS --------------------------------------------------------------- {{{
 
 " Set the backslash as the leader key.
-nnoremap mapleader = "\"
+let mapleader = "\"
 
 " Press \\ to jump back to the last cursor position.
 nnoremap <leader>\ ``
@@ -100,7 +102,7 @@ nnoremap <leader>\ ``
 nnoremap <silent> <leader>p :%w !lp<CR>
 
 " Type jj to exit insert mode quickly.
-nnoremap jj <Esc>
+inoremap jj <Esc>
 
 " Press the space bar to type the : character in command mode.
 nnoremap <space> :
@@ -174,6 +176,46 @@ augroup cursor_off
     autocmd WinLeave * set nocursorline nocursorcolumn
     autocmd WinEnter * set cursorline cursorcolumn
 augroup END
+
+" If GUI version of Vim is running set these options.
+if has('gui_running')
+
+    " Set the background tone.
+    set background=dark
+
+    " Set the color scheme.
+    colorscheme molokai
+
+    " Set a custom font you have installed on your computer.
+    " Syntax: <font_name>\ <weight>\ <size>
+    set guifont=Monospace\ Regular\ 12
+
+    " Display more of the file by default.
+    " Hide the toolbar.
+    set guioptions-=T
+
+    " Hide the the left-side scroll bar.
+    set guioptions-=L
+
+    " Hide the the left-side scroll bar.
+    set guioptions-=r
+
+    " Hide the the menu bar.
+    set guioptions-=m
+
+    " Hide the the bottom scroll bar.
+    set guioptions-=b
+
+    " Map the F4 key to toggle the menu, toolbar, and scroll bar.
+    " <Bar> is the pipe character.
+    " <CR> is the enter key.
+    nnoremap <F4> :if &guioptions=~#'mTr'<Bar>
+        \set guioptions-=mTr<Bar>
+        \else<Bar>
+        \set guioptions+=mTr<Bar>
+        \endif<CR>
+
+endif
 
 " }}}
 
